@@ -8,10 +8,12 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 
+const port = process.env.PORT || 4000;
+
 server.get('/', (req, res) => {
   Shoutouts.find()
   .then(shoutouts => {
-    res.status(200).json(shoutouts);
+    res.status(200).json(shoutouts).send({api:`up and running on port ${port}`});
   })
   .catch (error => {
     console.error('\nERROR', error);
