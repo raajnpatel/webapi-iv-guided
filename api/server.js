@@ -1,6 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 
+
 const Shoutouts = require('../data/shoutouts-model.js');
 
 const server = express();
@@ -11,9 +12,10 @@ server.use(express.json());
 const port = process.env.PORT || 4000;
 
 server.get('/', (req, res) => {
+  const autoMessage = process.env.MSG || "Hello World";
   Shoutouts.find()
   .then(shoutouts => {
-    res.status(200).json({message:`Running on port ${port}`,shoutouts});
+    res.status(200).json({message:`Running on port ${port}`, autoMessage, shoutouts});
   })
   .catch (error => {
     console.error('\nERROR', error);
