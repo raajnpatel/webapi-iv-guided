@@ -13,7 +13,7 @@ const port = process.env.PORT || 4000;
 server.get('/', (req, res) => {
   Shoutouts.find()
   .then(shoutouts => {
-    res.status(200).json(shoutouts).send({api:`up and running on port ${port}`});
+    res.status(200).json({message:`Running on port ${port}`,shoutouts});
   })
   .catch (error => {
     console.error('\nERROR', error);
